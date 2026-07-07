@@ -1448,11 +1448,11 @@ ul,li{
 		display: flex; justify-content: center; 
 	}
 	.media-hp-footer {
-        display: flex; justify-content: start; 
+        display: flex; justify-content: start; margin-left: 20px;
     }
 	
 	.align-right-lg { 
-		display: flex; justify-content: start; 
+		display: flex; justify-content: start; margin-left: 20px;
 	}
 
 	.group-title {

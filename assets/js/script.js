@@ -150,3 +150,135 @@
 	});	
 
 })(window.jQuery);
+
+/* ============================================
+   Galeri: Filter + Lihat Lainnya + Popup Album
+   Simpan sebagai assets/js/galeri-grid.js
+   lalu panggil setelah script.js di index.html:
+   <script src="assets/js/galeri-grid.js"></script>
+============================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    var grid = document.querySelector(".gallery-grid");
+    if (!grid) return;
+
+    var cards = Array.prototype.slice.call(grid.querySelectorAll(".gallery-card"));
+    var filterButtons = document.querySelectorAll(".gallery-filter .filter-btn");
+    var loadMoreBtn = document.getElementById("galleryLoadMore");
+    var initialCount = parseInt(grid.getAttribute("data-initial-count"), 10) || 6;
+    var currentFilter = "all";
+    var revealedAll = false;
+
+    // Isi badge jumlah foto di tiap card berdasarkan data-images
+    cards.forEach(function (card) {
+        var images = getCardImages(card);
+        var countEl = card.querySelector(".count-number");
+        if (countEl) {
+            countEl.textContent = images.length;
+        }
+        card.addEventListener("click", function () {
+            openModal(card);
+        });
+    });
+
+    function getCardImages(card) {
+        try {
+            return JSON.parse(card.getAttribute("data-images") || "[]");
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function cardMatchesFilter(card, filter) {
+        if (filter === "all") return true;
+        var categories = (card.getAttribute("data-category") || "").split(" ");
+        return categories.indexOf(filter) !== -1;
+    }
+
+    // Menentukan card mana yang tampil, berdasarkan filter aktif
+    // dan apakah user sudah klik "Lihat Lainnya" atau belum.
+    function render() {
+        var matching = cards.filter(function (card) {
+            return cardMatchesFilter(card, currentFilter);
+        });
+
+        cards.forEach(function (card) {
+            var matches = cardMatchesFilter(card, currentFilter);
+            card.classList.toggle("is-hidden", !matches);
+        });
+
+        matching.forEach(function (card, index) {
+            var shouldHideByLimit = !revealedAll && index >= initialCount;
+            card.classList.toggle("is-more-hidden", shouldHideByLimit);
+        });
+
+        if (loadMoreBtn) {
+            var needsButton = !revealedAll && matching.length > initialCount;
+            loadMoreBtn.classList.toggle("is-hidden", !needsButton);
+        }
+    }
+
+    filterButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            filterButtons.forEach(function (b) {
+                b.classList.remove("active");
+            });
+            btn.classList.add("active");
+            currentFilter = btn.getAttribute("data-filter");
+            revealedAll = false; // reset supaya limit berlaku lagi tiap ganti filter
+            render();
+        });
+    });
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener("click", function () {
+            revealedAll = true;
+            render();
+        });
+    }
+
+    render();
+
+    // ---------- Popup Album ----------
+    var modal = document.getElementById("galleryModal");
+    if (!modal) return;
+
+    var modalTitle = document.getElementById("galleryModalTitle");
+    var modalSubtitle = document.getElementById("galleryModalSubtitle");
+    var modalGrid = document.getElementById("galleryModalGrid");
+    var closeTriggers = modal.querySelectorAll("[data-close-modal]");
+
+    function openModal(card) {
+        var titleEl = card.querySelector(".gallery-card-title");
+        var images = getCardImages(card);
+
+        modalTitle.textContent = titleEl ? titleEl.textContent : "Dokumentasi Kegiatan";
+        modalSubtitle.textContent = images.length + " Foto";
+
+        modalGrid.innerHTML = "";
+        images.forEach(function (src) {
+            var img = document.createElement("img");
+            img.src = src;
+            img.alt = titleEl ? titleEl.textContent : "";
+            modalGrid.appendChild(img);
+        });
+
+        modal.classList.add("is-active");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        modal.classList.remove("is-active");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    closeTriggers.forEach(function (el) {
+        el.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+    });
+});

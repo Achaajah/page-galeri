@@ -181,11 +181,18 @@
      Letakkan section ini setelah <header> / main-header,
      mengikuti pola yang sama seperti .sapaan-kahim-wahim
 ============================================= -->
+<!-- ============================================
+     Hero Section: Dokumentasi Kegiatan HIMTIKA
+     Struktur: .gallery-hero-content, .gallery-hero-visual,
+     dan .btn-gallery sekarang jadi 3 anak grid yang setara
+     (bukan tombol nested di dalam content), supaya urutannya
+     bisa diatur bebas per breakpoint lewat grid-template-areas.
+============================================= -->
 <section class="gallery-hero">
     <div class="auto-container">
         <div class="gallery-hero-inner">
 
-            <!-- Kiri: Judul, deskripsi, tombol -->
+            <!-- Judul & deskripsi -->
             <div class="gallery-hero-content">
                 <h1 class="gallery-hero-title">
                     Dokumentasi<br>
@@ -195,22 +202,24 @@
                     Lihat kembali momen berharga, pencapaian, dan kolaborasi dari seluruh
                     program kerja Himpunan Mahasiswa Informatika Unsika.
                 </p>
-                <a href="#grid-section" class="btn-gallery">
-                    <span class="text-wrapper">Lihat Galeri</span>
-                    <span class="btn-gallery-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16210f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 4v14M6 12l6 6 6-6"/>
-                        </svg>
-                    </span>
-                </a>
             </div>
 
-            <!-- Kanan: Ilustrasi folder dokumentasi -->
+            <!-- Ilustrasi folder dokumentasi -->
             <div class="gallery-hero-visual">
                 <img src="assets/img/folder.png" alt="Dokumentasi kegiatan HIMTIKA" class="doc-folder-img">
                 <img src="assets/img/dash three.png" alt="" class="deco-dash dash-top">
                 <img src="assets/img/dash two.png" alt="" class="deco-dash dash-bottom">
             </div>
+
+            <!-- Tombol -->
+            <a href="#grid-section" class="btn-gallery">
+                <span class="text-wrapper">Lihat Galeri</span>
+                <span class="btn-gallery-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16210f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 4v14M6 12l6 6 6-6"/>
+                    </svg>
+                </span>
+            </a>
 
         </div>
     </div>

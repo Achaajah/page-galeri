@@ -1669,6 +1669,14 @@ li {
     overflow: hidden;
 }
 
+/* Pastikan konten hero (judul, deskripsi, tombol, gambar folder)
+   selalu di atas canvas partikel, apapun urutan render browser.
+   Canvas-nya sendiri sudah z-index:1, jadi konten harus lebih tinggi. */
+.gallery-hero > .auto-container {
+    position: relative;
+    z-index: 2;
+}
+
 /* ---------- Grid utama: atur urutan lewat grid-template-areas ---------- */
 
 .gallery-hero-inner {
@@ -1795,7 +1803,6 @@ li {
     filter: drop-shadow(10px 12px 8px #00000040);
     pointer-events: none;
     user-select: none;
-	margin-left: 150px;
 }
 
 .deco-dash {
@@ -1904,6 +1911,22 @@ li {
    RESPONSIVE
 ============================================= */
 
+/* Mobile & tablet kecil (di bawah 1024px): kecilin padding hero
+   biar tombol "Lihat Galeri" muat kelihatan tanpa scroll dulu */
+@media (max-width: 1023px) {
+    .gallery-hero {
+        padding: 120px 0 50px;
+    }
+
+    .gallery-hero-inner {
+        row-gap: 24px;
+    }
+
+    .gallery-hero-title {
+        margin-bottom: 16px;
+    }
+}
+
 @media (min-width: 1024px) {
     .gallery-hero {
         padding: 200px 0 120px;
@@ -1938,12 +1961,18 @@ li {
         align-self: center;
         max-width: 340px;
     }
+
+    /* Margin ini cuma berlaku di layout 2-kolom desktop,
+       biar folder image geser ke kanan sesuai desain aslinya
+       tanpa merusak centering di mobile */
+    .doc-folder-img {
+        margin-left: 150px;
+    }
 }
 
 @media (max-width: 480px) {
     .gallery-hero-visual {
-        max-width: 300px;
-        transform: scale(0.85);
+        max-width: 160px;
     }
 }
 
@@ -1976,6 +2005,21 @@ li {
     z-index: 0;
     pointer-events: none;
     user-select: none;
+}
+
+/* Clamp di atas punya batas minimum 6rem yang kegedean buat layar sempit
+   (16vw di HP cuma ~60px, tapi kepaksa jadi 96px karena minimumnya).
+   Turunkan minimum khusus mobile biar ikut ngecil sesuai lebar layar. */
+@media (max-width: 767px) {
+    .hero-bg-text {
+        font-size: clamp(3rem, 16vw, 6rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-bg-text {
+        font-size: clamp(2.5rem, 15vw, 4.5rem);
+    }
 }
 /* ============================================
    Section: Galeri Grid dengan Filter Kategori

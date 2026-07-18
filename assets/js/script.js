@@ -172,6 +172,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return cardMatchesFilter(card, currentFilter);
         });
 
+        // Simpan status visible/tidak SEBELUM class apapun diubah,
+        // dengan menggabungkan kedua alasan card bisa tersembunyi:
+        // beda kategori filter (is-hidden) ATAU kena limit "Lihat Lainnya" (is-more-hidden).
+        // Sebelumnya di sini cuma dicek is-more-hidden saja, jadi card yang
+        // sebelumnya sudah kelihatan di filter lama (misal 3 besar di "Semua")
+        // dan tetap masuk 3 besar di filter baru dianggap "tidak berubah"
+        // padahal secara filter dia baru saja tampil -> makanya animasinya
+        // tidak jalan di beberapa filter (mis. "Rapat & Koordinasi", "Agenda").
+        var wasVisible = cards.map(function (card) {
+            return !card.classList.contains("is-hidden") &&
+                   !card.classList.contains("is-more-hidden");
+        });
+
         cards.forEach(function (card) {
             var matches = cardMatchesFilter(card, currentFilter);
             card.classList.toggle("is-hidden", !matches);
@@ -179,11 +192,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         matching.forEach(function (card, index) {
             var shouldHideByLimit = !revealedAll && index >= initialCount;
-            var wasHidden = card.classList.contains("is-more-hidden");
+            var cardIndex = cards.indexOf(card);
+            var isNowVisible = !shouldHideByLimit;
             card.classList.toggle("is-more-hidden", shouldHideByLimit);
 
-            // Animasi masuk hanya untuk card yang baru saja ditampilkan
-            if (animate && wasHidden && !shouldHideByLimit) {
+            // Animasi masuk untuk card yang baru saja ditampilkan,
+            // baik karena filter berganti maupun limit "Lihat Lainnya" berubah
+            if (animate && isNowVisible && !wasVisible[cardIndex]) {
                 card.classList.remove("card-reveal");
                 void card.offsetWidth; // reflow, biar animasi bisa retrigger
                 card.style.animationDelay = (index % initialCount) * 60 + "ms";

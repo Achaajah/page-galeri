@@ -1663,168 +1663,176 @@ li {
 }
 
 .gallery-hero {
-    position: relative;
-    background: linear-gradient(180deg, #260828 0%, #311033 60%, #311033 100%);
-    padding: 160px 0 90px;
-    overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, #260828 0%, #311033 60%, #311033 100%);
+  padding: 160px 0 90px;
+  overflow: hidden;
 }
 
 /* Pastikan konten hero (judul, deskripsi, tombol, gambar folder)
    selalu di atas canvas partikel, apapun urutan render browser.
    Canvas-nya sendiri sudah z-index:1, jadi konten harus lebih tinggi. */
 .gallery-hero > .auto-container {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 /* ---------- Grid utama: atur urutan lewat grid-template-areas ---------- */
 
 .gallery-hero-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        "text"
-        "visual"
-        "button";
-    justify-items: center;
-    row-gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "text"
+    "visual"
+    "button";
+  justify-items: center;
+  row-gap: 40px;
 }
 
-.gallery-hero-content { grid-area: text; }
-.gallery-hero-visual  { grid-area: visual; }
-.btn-gallery           { grid-area: button; }
+.gallery-hero-content {
+  grid-area: text;
+}
+.gallery-hero-visual {
+  grid-area: visual;
+}
+.btn-gallery {
+  grid-area: button;
+}
 
 /* ---------- Konten teks ---------- */
 
 .gallery-hero-content {
-    text-align: center;
-    max-width: 620px;
+  text-align: center;
+  max-width: 620px;
 }
 
 .gallery-hero-title {
-    font-family: "Figtree", Helvetica;
-    font-weight: 700;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-    text-shadow: 0px 4px 4px #00000040;
-    margin-bottom: 26px;
+  font-family: "Figtree", Helvetica;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px #00000040;
+  margin-bottom: 26px;
 }
 
 .gallery-hero-title span {
-    color: #c5ad43;
+  color: #c5ad43;
 }
 
 .gallery-hero-desc {
-    font-family: "Figtree", Helvetica;
-    font-weight: 300;
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    line-height: 1.6;
-    color: #ffffff;
+  font-family: "Figtree", Helvetica;
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: #ffffff;
 }
 
 /* ---------- Tombol Lihat Galeri ---------- */
 
 .btn-gallery {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    color: #16210f;
-    text-decoration: none;
-    border-radius: 100px;
-    background-color: #d6c26a;
-    padding: 0.75em 1.6em;
-    font-family: "Figtree";
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 1s, transform 300ms ease, box-shadow 300ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #16210f;
+  text-decoration: none;
+  border-radius: 100px;
+  background-color: #d6c26a;
+  padding: 0.75em 1.6em;
+  font-family: "Figtree";
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition:
+    color 1s,
+    transform 300ms ease,
+    box-shadow 300ms ease;
 }
 
 .btn-gallery::before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 0%;
-    top: 0;
-    left: -40px;
-    transform: skewX(45deg);
-    background-color: #c5ad43;
-    z-index: -1;
-    transition: all 1s;
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  left: -40px;
+  transform: skewX(45deg);
+  background-color: #c5ad43;
+  z-index: -1;
+  transition: all 1s;
 }
 
 .btn-gallery:hover::before {
-    width: 160%;
+  width: 160%;
 }
 
 .btn-gallery:hover {
-    color: #16210f;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(214, 194, 106, 0.35);
+  color: #16210f;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(214, 194, 106, 0.35);
 }
 
 .btn-gallery:active {
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
 
 .btn-gallery-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 2px solid #16210f;
-    flex-shrink: 0;
-    transition: transform 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #16210f;
+  flex-shrink: 0;
+  transition: transform 300ms ease;
 }
 
 .btn-gallery:hover .btn-gallery-icon {
-    transform: translateY(2px);
+  transform: translateY(2px);
 }
 
 /* ---------- Ilustrasi folder ---------- */
 
 .gallery-hero-visual {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
+  position: relative;
+  width: 100%;
+  max-width: 420px;
 }
 
 .doc-folder-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(10px 12px 8px #00000040);
-    pointer-events: none;
-    user-select: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(10px 12px 8px #00000040);
+  pointer-events: none;
+  user-select: none;
 }
 
 .deco-dash {
-    position: absolute;
-    height: auto;
-    pointer-events: none;
-    user-select: none;
-	
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
 }
 
 .dash-top {
-    width: 34%;
-    top: -8%;
-	margin-left: 450px;
-    /* right: -14%; */
+  width: 34%;
+  top: -8%;
+  margin-left: 450px;
+  /* right: -14%; */
 }
 
 .dash-bottom {
-    width: 26%;
-    bottom: 6%;
-	margin-left: 115px;
-    /* left: -12%; */
+  width: 26%;
+  bottom: 6%;
+  margin-left: 115px;
+  /* left: -12%; */
 }
 
 /* ============================================
@@ -1832,79 +1840,112 @@ li {
 ============================================= */
 
 @keyframes heroFadeUp {
-    from { opacity: 0; transform: translateY(26px); }
-    to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroVisualIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.94); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes docFloat {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-14px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 @keyframes dashDriftTop {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50%      { transform: translateY(-10px) rotate(3deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
 }
 
 @keyframes dashDriftBottom {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50%      { transform: translateY(10px) rotate(-3deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-3deg);
+  }
 }
 
 /* Entrance: judul, deskripsi, tombol muncul bertahap satu-satu */
 .gallery-hero-title,
 .gallery-hero-desc,
 .btn-gallery {
-    opacity: 0;
-    animation: heroFadeUp 0.8s ease-out forwards;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out forwards;
 }
 
-.gallery-hero-title { animation-delay: 0.1s; }
-.gallery-hero-desc  { animation-delay: 0.3s; }
-.btn-gallery        { animation-delay: 0.75s; }
+.gallery-hero-title {
+  animation-delay: 0.1s;
+}
+.gallery-hero-desc {
+  animation-delay: 0.3s;
+}
+.btn-gallery {
+  animation-delay: 0.75s;
+}
 
 /* Entrance: folder muncul dari bawah dengan sedikit scale */
 .gallery-hero-visual {
-    opacity: 0;
-    animation: heroVisualIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 0.45s;
+  opacity: 0;
+  animation: heroVisualIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.45s;
 }
 
 /* Setelah landing, folder melayang pelan terus-menerus */
 .doc-folder-img {
-    animation: docFloat 5s ease-in-out infinite;
-    animation-delay: 1.4s;
+  animation: docFloat 5s ease-in-out infinite;
+  animation-delay: 1.4s;
 }
 
 /* Dash ikut melayang, arah & durasi beda biar terasa organik */
 .dash-top {
-    animation: dashDriftTop 4s ease-in-out infinite;
-    animation-delay: 1.6s;
+  animation: dashDriftTop 4s ease-in-out infinite;
+  animation-delay: 1.6s;
 }
 
 .dash-bottom {
-    animation: dashDriftBottom 4.5s ease-in-out infinite;
-    animation-delay: 1.8s;
+  animation: dashDriftBottom 4.5s ease-in-out infinite;
+  animation-delay: 1.8s;
 }
 
 /* Hormati preferensi user yang menonaktifkan animasi */
 @media (prefers-reduced-motion: reduce) {
-    .gallery-hero-title,
-    .gallery-hero-desc,
-    .btn-gallery,
-    .gallery-hero-visual,
-    .doc-folder-img,
-    .dash-top,
-    .dash-bottom {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
+  .gallery-hero-title,
+  .gallery-hero-desc,
+  .btn-gallery,
+  .gallery-hero-visual,
+  .doc-folder-img,
+  .dash-top,
+  .dash-bottom {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* ============================================
@@ -1914,112 +1955,113 @@ li {
 /* Mobile & tablet kecil (di bawah 1024px): kecilin padding hero
    biar tombol "Lihat Galeri" muat kelihatan tanpa scroll dulu */
 @media (max-width: 1023px) {
-    .gallery-hero {
-        padding: 120px 0 50px;
-    }
+  .gallery-hero {
+    padding: 120px 0 50px;
+  }
 
-    .gallery-hero-inner {
-        row-gap: 24px;
-    }
+  .gallery-hero-inner {
+    row-gap: 24px;
+  }
 
-    .gallery-hero-title {
-        margin-bottom: 16px;
-    }
+  .gallery-hero-title {
+    margin-bottom: 16px;
+  }
 }
 
 @media (min-width: 1024px) {
-    .gallery-hero {
-        padding: 200px 0 120px;
-        --side-gap: 80px;
-    }
+  .gallery-hero {
+    padding: 200px 0 120px;
+    --side-gap: 80px;
+  }
 
-    /* Padding kiri-kanan hero disamakan dengan gap navbar.
+  /* Padding kiri-kanan hero disamakan dengan gap navbar.
        Kalau masih belum pas, cukup ubah angka --side-gap di atas. */
-    .gallery-hero .auto-container {
-        padding-left: var(--side-gap);
-        padding-right: var(--side-gap);
-    }
+  .gallery-hero .auto-container {
+    padding-left: var(--side-gap);
+    padding-right: var(--side-gap);
+  }
 
-    .gallery-hero-inner {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "text visual"
-            "button visual";
-        justify-items: start;
-        align-items: start;
-        column-gap: 32px;
-        row-gap: 28px;
-    }
+  .gallery-hero-inner {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "text visual"
+      "button visual";
+    justify-items: start;
+    align-items: start;
+    column-gap: 32px;
+    row-gap: 28px;
+  }
 
-    .gallery-hero-content {
-        text-align: left;
-        max-width: 560px;
-    }
+  .gallery-hero-content {
+    text-align: left;
+    max-width: 560px;
+  }
 
-    .gallery-hero-visual {
-        grid-row: 1 / 3;
-        align-self: center;
-        max-width: 340px;
-    }
+  .gallery-hero-visual {
+    grid-row: 1 / 3;
+    align-self: center;
+    max-width: 340px;
+  }
 
-    /* Margin ini cuma berlaku di layout 2-kolom desktop,
+  /* Margin ini cuma berlaku di layout 2-kolom desktop,
        biar folder image geser ke kanan sesuai desain aslinya
        tanpa merusak centering di mobile */
-    .doc-folder-img {
-        margin-left: 150px;
-    }
+  .doc-folder-img {
+    margin-left: 150px;
+  }
 }
 
 @media (max-width: 480px) {
-    .gallery-hero-visual {
-        max-width: 160px;
-    }
+  .gallery-hero-visual {
+    max-width: 260px;
+  }
 }
 
 /* ---------- Canvas particle ---------- */
 .hero-particles-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* ---------- Teks GALERI sebagai background + glow ---------- */
 .hero-bg-text {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: "Figtree", Helvetica;
-    font-weight: 700;
-    font-size: clamp(6rem, 16vw, 10rem);
-    line-height: 1;
-    letter-spacing: 0.02em;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(214, 194, 106, 0.18);
-    text-shadow: 0 0 40px rgba(214, 194, 106, 0.25),
-                 0 0 80px rgba(197, 173, 67, 0.15);
-    white-space: nowrap;
-    z-index: 0;
-    pointer-events: none;
-    user-select: none;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Figtree", Helvetica;
+  font-weight: 700;
+  font-size: clamp(6rem, 16vw, 10rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214, 194, 106, 0.18);
+  text-shadow:
+    0 0 40px rgba(214, 194, 106, 0.25),
+    0 0 80px rgba(197, 173, 67, 0.15);
+  white-space: nowrap;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* Clamp di atas punya batas minimum 6rem yang kegedean buat layar sempit
    (16vw di HP cuma ~60px, tapi kepaksa jadi 96px karena minimumnya).
    Turunkan minimum khusus mobile biar ikut ngecil sesuai lebar layar. */
 @media (max-width: 767px) {
-    .hero-bg-text {
-        font-size: clamp(3rem, 16vw, 6rem);
-    }
+  .hero-bg-text {
+    font-size: clamp(3rem, 16vw, 6rem);
+  }
 }
 
 @media (max-width: 480px) {
-    .hero-bg-text {
-        font-size: clamp(2.5rem, 15vw, 4.5rem);
-    }
+  .hero-bg-text {
+    font-size: clamp(2.5rem, 15vw, 4.5rem);
+  }
 }
 /* ============================================
    Section: Galeri Grid dengan Filter Kategori
@@ -2027,206 +2069,236 @@ li {
 ============================================= */
 
 .gallery-grid-section {
-    position: relative;
-    background: linear-gradient(180deg, #311033 0%, #260828 100%, #311033 60%);
-    padding: 70px 0 100px;
-    overflow: hidden;
-    scroll-margin-top: 100px;
+  position: relative;
+  background: linear-gradient(180deg, #311033 0%, #260828 100%, #311033 60%);
+  padding: 70px 0 100px;
+  overflow: hidden;
+  scroll-margin-top: 100px;
 }
 
 /* Tekstur bintang tipis, konsisten sama nuansa dark-sky di hero */
 .gallery-grid-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1.5px);
-    background-size: 130px 130px;
-    opacity: 0.5;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.35) 1px,
+    transparent 1.5px
+  );
+  background-size: 130px 130px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .gallery-grid-section .auto-container {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---------- Ornamen dekoratif (kamera, polaroid, film strip) ---------- */
 
 .gallery-ornaments {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .ornament {
-    position: absolute;
-    fill: none;
-    stroke: #d6c26a;
-    opacity: 0.08;
+  position: absolute;
+  fill: none;
+  stroke: #d6c26a;
+  opacity: 0.08;
 }
 
 .ornament-camera {
-    top: 8%;
-    right: 6%;
-    width: 140px;
-    transform: rotate(-12deg);
+  top: 8%;
+  right: 6%;
+  width: 140px;
+  transform: rotate(-12deg);
 }
 
 .ornament-polaroid-1 {
-    bottom: 8%;
-    left: 4%;
-    width: 90px;
-    transform: rotate(10deg);
+  bottom: 8%;
+  left: 4%;
+  width: 90px;
+  transform: rotate(10deg);
 }
 
 .ornament-polaroid-2 {
-    top: 42%;
-    left: 10%;
-    width: 60px;
-    opacity: 0.05;
-    transform: rotate(-8deg);
+  top: 42%;
+  left: 10%;
+  width: 60px;
+  opacity: 0.05;
+  transform: rotate(-8deg);
 }
 
 .ornament-film {
-    bottom: 6%;
-    right: 8%;
-    width: 160px;
-    transform: rotate(8deg);
+  bottom: 6%;
+  right: 8%;
+  width: 160px;
+  transform: rotate(8deg);
 }
 
 @media (max-width: 768px) {
-    .ornament-polaroid-2,
-    .ornament-film {
-        display: none; /* biar ga penuh di layar kecil */
-    }
+  .ornament-polaroid-2,
+  .ornament-film {
+    display: none; /* biar ga penuh di layar kecil */
+  }
 }
 
 /* ---------- Filter kategori ---------- */
 
 .gallery-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 44px;
 }
 
 .filter-btn {
-    font-family: "Figtree";
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 100px;
-    padding: 0.65em 1.4em;
-    cursor: pointer;
-    transition: all 300ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Figtree";
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+  padding: 0.65em 1.4em;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+/* Icon ikut warna teks tombol (stroke="currentColor" di SVG-nya),
+   jadi otomatis berubah warna pas hover/active tanpa CSS tambahan */
+.filter-btn-icon {
+  flex-shrink: 0;
+  display: block;
 }
 
 .filter-btn:hover {
-    border-color: #d6c26a;
-    color: #d6c26a;
+  border-color: #d6c26a;
+  color: #d6c26a;
 }
 
 .filter-btn.active {
-    background: linear-gradient(135deg, #f3d979 0%, #d6c26a 100%);
-    color: #16210f;
-    border-color: transparent;
-    box-shadow: 4px 5px 0px #00000040;
+  background: linear-gradient(135deg, #f3d979 0%, #d6c26a 100%);
+  color: #16210f;
+  border-color: transparent;
+  box-shadow: 4px 5px 0px #00000040;
 }
 
 .filter-btn.active:hover {
-    color: #16210f;
+  color: #16210f;
 }
 
 /* ---------- Grid foto ---------- */
 
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
 }
 
 .gallery-card {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 8px 9px 4px #00000040;
-    transition: transform 200ms ease, box-shadow 200ms ease;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 8px 9px 4px #00000040;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
 }
 
 /* Efek "tekan" waktu card diklik */
 .gallery-card:active {
-    transform: scale(0.97);
-    box-shadow: 4px 5px 2px #00000040;
+  transform: scale(0.97);
+  box-shadow: 4px 5px 2px #00000040;
 }
 
 /* Diubah dari div+background-image jadi <img> murni */
 .gallery-card-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    background-color: #311033;
-    transition: transform 600ms ease;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: #311033;
+  transition: transform 600ms ease;
 }
 
 .gallery-card:hover .gallery-card-image {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 .gallery-card-scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.85) 100%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
 }
 
 .gallery-card-tags {
-    position: absolute;
-    left: 16px;
-    bottom: 54px;
-    display: flex;
-    gap: 8px;
-    z-index: 2;
+  position: absolute;
+  left: 16px;
+  bottom: 54px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
 }
 
 .tag {
-    font-family: "Montserrat";
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 4px 12px;
-    border-radius: 100px;
+  font-family: "Montserrat";
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 4px 12px;
+  border-radius: 100px;
 }
 
-.tag-rapat       { background-color: #d6c26a; color: #16210f; }
-.tag-agenda      { background-color: #2f6fed; color: #ffffff; }
-.tag-kaderisasi  { background-color: #8b5cf6; color: #ffffff; }
-.tag-bonding     { background-color: #ef7d55; color: #ffffff; }
+.tag-rapat {
+  background-color: #d6c26a;
+  color: #16210f;
+}
+.tag-agenda {
+  background-color: #2f6fed;
+  color: #ffffff;
+}
+.tag-kaderisasi {
+  background-color: #8b5cf6;
+  color: #ffffff;
+}
+.tag-bonding {
+  background-color: #ef7d55;
+  color: #ffffff;
+}
 
 .gallery-card-title {
-    position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    z-index: 2;
-    font-family: "Figtree";
-    font-weight: 700;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #ffffff;
-    text-shadow: 0px 2px 4px #00000059;
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  font-family: "Figtree";
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #ffffff;
+  text-shadow: 0px 2px 4px #00000059;
 }
 
 /* Item yang disembunyikan oleh filter JS */
 .gallery-card.is-hidden {
-    display: none;
+  display: none;
 }
 
 /* ============================================
@@ -2234,18 +2306,34 @@ li {
 ============================================= */
 
 @media (max-width: 640px) {
-    .gallery-filter {
-        gap: 10px;
-    }
+  .gallery-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 10px;
+    padding-bottom: 6px;
+    margin-bottom: 32px;
+    /* Sembunyikan scrollbar bawaan browser, tapi tetap bisa discroll */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge lama */
+  }
 
-    .filter-btn {
-        font-size: 0.85rem;
-        padding: 0.6em 1.1em;
-    }
+  .gallery-filter::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
+  .filter-btn {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 0.6em 1.1em;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================
@@ -2253,31 +2341,31 @@ li {
 ============================================= */
 
 .gallery-card-count {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 10px;
-    border-radius: 100px;
-    background-color: rgba(38, 8, 40, 0.55);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background-color: rgba(38, 8, 40, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .gallery-card-count .count-number {
-    font-family: "Figtree";
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #ffffff;
+  font-family: "Figtree";
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 /* Card dari data-initial-count yang belum ditampilkan */
 .gallery-card.is-more-hidden {
-    display: none;
+  display: none;
 }
 
 /* ============================================
@@ -2285,18 +2373,18 @@ li {
 ============================================= */
 
 @keyframes cardReveal {
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .gallery-card.card-reveal {
-    animation: cardReveal 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: cardReveal 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* ============================================
@@ -2304,51 +2392,51 @@ li {
 ============================================= */
 
 .gallery-loadmore-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 44px;
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
 }
 
 .btn-loadmore {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: "Figtree";
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 100px;
-    padding: 0.75em 1.8em;
-    cursor: pointer;
-    transition: all 300ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Figtree";
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  padding: 0.75em 1.8em;
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
 .btn-loadmore:hover {
-    border-color: #d6c26a;
-    color: #d6c26a;
+  border-color: #d6c26a;
+  color: #d6c26a;
 }
 
 .btn-loadmore svg {
-    transition: transform 300ms ease;
+  transition: transform 300ms ease;
 }
 
 .btn-loadmore:hover svg {
-    transform: translateY(2px);
+  transform: translateY(2px);
 }
 
 .btn-loadmore.is-hidden {
-    display: none;
+  display: none;
 }
 
 /* Saat expanded, panah berputar 180deg jadi menunjuk ke atas ("Lihat Lebih Sedikit") */
 .btn-loadmore.is-expanded svg {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .btn-loadmore.is-expanded:hover svg {
-    transform: rotate(180deg) translateY(-2px);
+  transform: rotate(180deg) translateY(-2px);
 }
 
 /* ============================================
@@ -2356,207 +2444,209 @@ li {
 ============================================= */
 
 .gallery-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 300ms ease, visibility 300ms ease;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
 }
 
 .gallery-modal.is-active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .gallery-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(38, 8, 40, 0.82);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+  position: absolute;
+  inset: 0;
+  background-color: rgba(38, 8, 40, 0.82);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .gallery-modal-box {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 640px;
-    max-height: 85vh;
-    overflow-y: auto;
-    background: linear-gradient(180deg, #311033 0%, #46204E 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 18px;
-    padding: 32px;
-    box-shadow: 10px 14px 0px #00000040;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #311033 0%, #46204e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 10px 14px 0px #00000040;
 
-    transform: translateY(24px);
-    transition: transform 300ms ease;
+  transform: translateY(24px);
+  transition: transform 300ms ease;
 }
 
 .gallery-modal.is-active .gallery-modal-box {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .gallery-modal-close {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background-color: transparent;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 300ms ease;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
 .gallery-modal-close:hover {
-    border-color: #d6c26a;
-    color: #d6c26a;
+  border-color: #d6c26a;
+  color: #d6c26a;
 }
 
 .gallery-modal-title {
-    font-family: "Figtree";
-    font-size: clamp(1.3rem, 3vw, 1.7rem);
-    font-weight: 700;
-    color: #ffffff;
-    padding-right: 40px;
-    margin-bottom: 6px;
+  font-family: "Figtree";
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 700;
+  color: #ffffff;
+  padding-right: 40px;
+  margin-bottom: 6px;
 }
 
 .gallery-modal-subtitle {
-    font-family: "Figtree";
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 24px;
+  font-family: "Figtree";
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
 }
 
 /* ---------- Slider ---------- */
 
 .gallery-modal-slider-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .gallery-modal-slider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .slider-track-wrapper {
-    flex: 1;
-    overflow: hidden;
-    border-radius: 14px;
-    background-color: #260828;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: #260828;
 }
 
 .slider-track {
-    display: flex;
-    transition: transform 400ms ease;
+  display: flex;
+  transition: transform 400ms ease;
 }
 
 .slider-track .slide {
-    flex: 0 0 100%;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    display: flex;
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
 }
 
 .slider-track .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background-color: #260828;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #260828;
 }
 
 .slider-nav {
-    flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background-color: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 300ms ease;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
 .slider-nav:hover {
-    border-color: #d6c26a;
-    color: #d6c26a;
-    background-color: rgba(214, 194, 106, 0.1);
+  border-color: #d6c26a;
+  color: #d6c26a;
+  background-color: rgba(214, 194, 106, 0.1);
 }
 
 .slider-nav:disabled {
-    opacity: 0.3;
-    cursor: default;
+  opacity: 0.3;
+  cursor: default;
 }
 
 .slider-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
 .slider-counter {
-    font-family: "Figtree";
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
-    min-width: 46px;
-    text-align: center;
+  font-family: "Figtree";
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  min-width: 46px;
+  text-align: center;
 }
 
 .slider-dots {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .slider-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: none;
-    padding: 0;
-    background-color: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 300ms ease;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
 .slider-dots .dot.active {
-    background-color: #d6c26a;
-    width: 22px;
-    border-radius: 4px;
+  background-color: #d6c26a;
+  width: 22px;
+  border-radius: 4px;
 }
 
 @media (max-width: 640px) {
-    .gallery-modal-box {
-        padding: 24px 18px;
-    }
+  .gallery-modal-box {
+    padding: 24px 18px;
+  }
 
-    .slider-nav {
-        width: 34px;
-        height: 34px;
-    }
+  .slider-nav {
+    width: 34px;
+    height: 34px;
+  }
 
-    .slider-track .slide {
-        aspect-ratio: 4 / 3;
-    }
+  .slider-track .slide {
+    aspect-ratio: 4 / 3;
+  }
 }

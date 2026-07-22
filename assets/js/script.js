@@ -119,7 +119,8 @@
 })(window.jQuery);
 
 /* ============================================
-   Galeri: Filter + Lihat Lainnya/Lebih Sedikit + Popup Album
+   Galeri: Filter + Lihat Lainnya/Lebih Sedikit + Popup Album (Slider, bisa diklik/next-prev)
+   + Fallback "Segera Hadir" kalau foto belum ke-upload / path-nya belum ada
    Simpan sebagai assets/js/galeri-grid.js
    lalu panggil setelah script.js di index.html:
    <script src="assets/js/galeri-grid.js"></script>
@@ -137,6 +138,93 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentFilter = "all";
     var revealedAll = false;
 
+    // ---------- Fallback foto belum ada (request Fajar) ----------
+    // Kalau <img> gagal dimuat (404 / path belum ada file-nya), sembunyikan
+    // <img> itu dan ganti tampilannya jadi kartu "Segera Hadir" biar rapi,
+    // ga keliatan kayak gambar rusak/broken-icon browser pas deploy ke prod.
+    //
+    // Style placeholder ditulis inline langsung di sini (bukan lewat class
+    // CSS terpisah) supaya posisinya selalu nempel & ke-crop rapi di dalam
+    // card, apapun kondisi stylesheet luar — dan supaya file ini berdiri
+    // sendiri tanpa perlu tempel CSS tambahan ke mana pun.
+    function showSoonPlaceholder(imgEl, container) {
+        imgEl.style.display = "none";
+
+        // Hindari nambah placeholder dobel
+        if (container.querySelector(".img-soon-placeholder")) return;
+
+        // Container tempat placeholder ditaruh WAJIB jadi acuan posisi,
+        // supaya placeholder ke-clip di dalam card, bukan "kabur" ke luar.
+        var computedPosition = window.getComputedStyle(container).position;
+        if (computedPosition === "static") {
+            container.style.position = "relative";
+        }
+        if (window.getComputedStyle(container).overflow === "visible") {
+            container.style.overflow = "hidden";
+        }
+
+        var placeholder = document.createElement("div");
+        placeholder.className = "img-soon-placeholder";
+        placeholder.style.cssText = [
+            "position:absolute",
+            "inset:0",
+            "display:flex",
+            "flex-direction:column",
+            "align-items:center",
+            "justify-content:center",
+            "gap:8px",
+            "text-align:center",
+            "background:linear-gradient(135deg, #46204e 0%, #311033 100%)",
+            "color:#d6c26a",
+            "z-index:1",
+            "pointer-events:none"
+        ].join(";");
+
+        var icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        icon.setAttribute("width", "28");
+        icon.setAttribute("height", "28");
+        icon.setAttribute("viewBox", "0 0 24 24");
+        icon.setAttribute("fill", "none");
+        icon.setAttribute("stroke", "currentColor");
+        icon.setAttribute("stroke-width", "2");
+        icon.setAttribute("stroke-linecap", "round");
+        icon.setAttribute("stroke-linejoin", "round");
+        icon.innerHTML =
+            '<rect x="3" y="3" width="18" height="18" rx="2"></rect>' +
+            '<circle cx="8.5" cy="8.5" r="1.5"></circle>' +
+            '<path d="M21 15l-5-5L5 21"></path>';
+
+        var label = document.createElement("span");
+        label.textContent = "Segera Hadir";
+        label.style.cssText =
+            "font-family:'Figtree',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.02em;";
+
+        placeholder.appendChild(icon);
+        placeholder.appendChild(label);
+        container.appendChild(placeholder);
+    }
+
+    function handleImgFallback(imgEl, container) {
+        // Kasus 1: gambar SUDAH gagal duluan sebelum listener ini kepasang
+        // (umum terjadi buat file lokal yang gagal load-nya cepat banget,
+        // lebih cepat dari DOMContentLoaded). Cek langsung di sini.
+        if (imgEl.complete) {
+            if (imgEl.naturalWidth === 0) {
+                showSoonPlaceholder(imgEl, container);
+                return;
+            }
+        } else {
+            // Kasus 2: gambar masih proses load, pasang listener buat nunggu.
+            imgEl.addEventListener(
+                "error",
+                function () {
+                    showSoonPlaceholder(imgEl, container);
+                },
+                { once: true }
+            );
+        }
+    }
+
     // Isi badge jumlah foto di tiap card berdasarkan data-images
     cards.forEach(function (card) {
         var images = getCardImages(card);
@@ -144,6 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (countEl) {
             countEl.textContent = images.length;
         }
+
+        // Pasang fallback ke thumbnail cover card
+        var thumbImg = card.querySelector(".gallery-card-image");
+        if (thumbImg) handleImgFallback(thumbImg, card);
+
         card.addEventListener("click", function () {
             openModal(card);
         });
@@ -175,11 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Simpan status visible/tidak SEBELUM class apapun diubah,
         // dengan menggabungkan kedua alasan card bisa tersembunyi:
         // beda kategori filter (is-hidden) ATAU kena limit "Lihat Lainnya" (is-more-hidden).
-        // Sebelumnya di sini cuma dicek is-more-hidden saja, jadi card yang
-        // sebelumnya sudah kelihatan di filter lama (misal 3 besar di "Semua")
-        // dan tetap masuk 3 besar di filter baru dianggap "tidak berubah"
-        // padahal secara filter dia baru saja tampil -> makanya animasinya
-        // tidak jalan di beberapa filter (mis. "Rapat & Koordinasi", "Agenda").
         var wasVisible = cards.map(function (card) {
             return !card.classList.contains("is-hidden") &&
                    !card.classList.contains("is-more-hidden");
@@ -250,7 +338,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     render(false);
 
-    // ---------- Popup Album (Slider) ----------
+    // ---------- Popup Album (Slider) — ini yang dimaksud Bang Raika:
+    // foto di-klik lalu muncul popup, bisa next/prev satu-satu, ada
+    // counter & dot indicator, plus swipe di HP ----------
     var modal = document.getElementById("galleryModal");
     if (!modal) return;
 
@@ -282,6 +372,12 @@ document.addEventListener("DOMContentLoaded", function () {
             img.alt = titleEl ? titleEl.textContent : "";
             slide.appendChild(img);
             modalGrid.appendChild(slide);
+
+            // Pasang fallback juga di tiap foto dalam slider,
+            // jadi kalau salah satu foto di album belum ada filenya,
+            // yang muncul cuma slide itu aja yang jadi "Segera Hadir",
+            // ga ganggu foto lain yang udah ada.
+            handleImgFallback(img, slide);
         });
 
         totalSlides = images.length;

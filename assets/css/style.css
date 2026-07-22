@@ -2471,21 +2471,30 @@ li {
   -webkit-backdrop-filter: blur(2px);
 }
 
+.gallery-modal {
+  padding: 0;
+}
+
 .gallery-modal-box {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 640px;
-  max-height: 85vh;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
   overflow-y: auto;
   background: linear-gradient(180deg, #311033 0%, #46204e 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-  padding: 32px;
-  box-shadow: 10px 14px 0px #00000040;
+  border: none;
+  border-radius: 0;
+  padding: 60px 40px;
+  box-shadow: none;
 
-  transform: translateY(24px);
-  transition: transform 300ms ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  transform: translateY(0);
+  transition: none;
 }
 
 .gallery-modal.is-active .gallery-modal-box {
@@ -2537,6 +2546,11 @@ li {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  flex: 1;
+  min-height: 0;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .gallery-modal-slider {
@@ -2560,7 +2574,8 @@ li {
 .slider-track .slide {
   flex: 0 0 100%;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: auto;
+  height: 65vh;
   display: flex;
 }
 
@@ -2638,15 +2653,49 @@ li {
 
 @media (max-width: 640px) {
   .gallery-modal-box {
-    padding: 24px 18px;
+    padding: 30px 16px;
   }
 
   .slider-nav {
     width: 34px;
     height: 34px;
   }
-
   .slider-track .slide {
-    aspect-ratio: 4 / 3;
+    height: 55vh;
   }
+}
+/* ============================================
+   Fallback foto belum ada (request Fajar)
+   Placeholder ini otomatis muncul lewat JS (galeri-grid.js)
+   kalau <img> gagal dimuat (404 / file belum di-upload),
+   supaya ga keliatan broken-image pas deploy ke prod.
+============================================= */
+
+.img-soon-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  background: linear-gradient(135deg, #46204e 0%, #311033 100%);
+  color: #d6c26a;
+  z-index: 1;
+}
+
+.img-soon-placeholder svg {
+  opacity: 0.85;
+}
+
+.img-soon-placeholder span {
+  font-family: "Figtree";
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.slider-track .slide .img-soon-placeholder span {
+  font-size: 1.05rem;
 }

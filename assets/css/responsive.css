@@ -272,9 +272,9 @@
 	} */
 
     .back-to-top {
-        bottom: 40px; /* Lebih mepet ke bawah */
-        right: 30px;  /* Lebih mepet ke kanan */
-    }
+    bottom: 80px;   /* 20px + 45px (tombol HIMTIKA) + 15px jarak */
+    right: 22.5px;  /* tombol 40px, tengahnya sejajar tombol HIMTIKA */
+}
 
     .button {
         width: 40px;  /* Kecilin dari 50px ke 40px */
@@ -323,9 +323,11 @@
 	}
 }
 
-@media only screen and (max-width: 480px) {
-    .back-to-top {
-        bottom: 30px; 
+
+@media (max-width: 768px){
+    /* Button BackToHIMTIKA */
+    .Btn-parent {
+        bottom: 20px;
         right: 20px;
     }
 }

@@ -324,18 +324,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    if (loadMoreBtn) {
+       if (loadMoreBtn) {
         loadMoreBtn.addEventListener("click", function () {
+            // simpan posisi layar sebelum card ditambah/dikurangi
+            var savedScrollY = window.scrollY;
+
             revealedAll = !revealedAll;
             render(true);
 
-            if (!revealedAll) {
-                // Balik scroll ke atas grid biar posisi ga "kejauhan"
+            if (revealedAll) {
+                // Lihat Lainnya: layar tetap di posisi semula, tidak ikut turun
+                window.scrollTo({ top: savedScrollY, left: 0, behavior: "instant" });
+            } else {
+                // Lihat Lebih Sedikit: balik ke atas grid
                 grid.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
     }
-
     render(false);
 
     // ---------- Popup Album (Slider) — ini yang dimaksud Bang Raika:
